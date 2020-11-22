@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../styled/Button';
 import queries from '../utils/queries';
+import colors from '../utils/colors'
 
 const Container = styled.div`
   display: flex;
@@ -13,10 +14,15 @@ const Container = styled.div`
 const ContentContainer = styled.div`
   z-index: 1;
   position: absolute;
+  width: calc(100vw - 80px);
+  padding-left: 40px;
+  padding-right: 40px;
   @media (min-width: ${queries.lg}) {
+    width: unset;
     position: unset;
     display: flex;
     z-index: 0;
+    padding-left: 50px;
   }
 `
 
@@ -52,7 +58,8 @@ const Home = props => {
       <ImageContainer>
         <LinearMask />
         <ContentContainer>
-          <Button>Testando</Button>
+          <Button buttonColor={colors.white} fontColor={colors.secondary}>Criar conta</Button>
+          <Button variant='outlined' buttonColor={colors.white} fontColor={colors.white}>Entrar</Button>
         </ContentContainer>
       </ImageContainer>
     </Container>
