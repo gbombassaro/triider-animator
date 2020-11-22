@@ -3,5 +3,6 @@
 /example/.next
 .env
 *.lock
+/.DS_Store
 
 package-lock.json
