@@ -13,15 +13,17 @@ export const ButtonTypography = styled.span`
   margin-right: 40px;
 `
 
-const PrimaryButton = styled.div`
+const PrimaryButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: unset;
   background-color: ${({color}) => color ? color : colors.primary};
   height: ${({size}) => size ? size : '60px'};
   width: ${({fullWidth}) => fullWidth ? '100%' : 'max-content'};
   border-radius: 5px;
   cursor: pointer;
+  appearance: unset;
   &:hover {
     opacity: 0.8;
   }
@@ -30,17 +32,19 @@ const PrimaryButton = styled.div`
   }
 `
 
-const OutlinedButton = styled.div`
+const OutlinedButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
   border-width: 1px;
   border-color: ${({color}) => color ? color : colors.primary};
   border-style: solid;
+  background-color: unset;
   height: ${({size}) => size ? size : '60px'};
   width: ${({fullWidth}) => fullWidth ? '100%' : 'max-content'};
   border-radius: 5px;
   cursor: pointer;
+  appearance: unset;
   &:hover {
     opacity: 0.8;
   }
@@ -49,11 +53,11 @@ const OutlinedButton = styled.div`
   }
 `
 
-const Button = ({bold, children, variant, size, fontColor, buttonColor}) => {
+const Button = ({bold, children, variant, size, fontColor, buttonColor, onClick}) => {
   switch(variant) {
     case 'default':
       return (
-        <PrimaryButton size={size} color={buttonColor}>
+        <PrimaryButton size={size} color={buttonColor} onClick={onClick}>
           <ButtonTypography size={size} bold={bold} color={fontColor}>
             {children}
           </ButtonTypography>
@@ -61,7 +65,7 @@ const Button = ({bold, children, variant, size, fontColor, buttonColor}) => {
       )
     case 'outlined':
       return (
-        <OutlinedButton size={size} color={buttonColor}>
+        <OutlinedButton size={size} color={buttonColor} onClick={onClick}>
           <ButtonTypography size={size} bold={bold} color={fontColor ? fontColor : colors.white}>
             {children}
           </ButtonTypography>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import Button from '../styled/Button';
 import Typography from '../styled/Typography';
@@ -59,26 +59,63 @@ const LinearMask = styled.div`
 `
 
 const Home = props => {
+
+  const [content, setContent] = useState('');
+
+  const renderHome = () => {
+    return (
+      <ContentContainer>
+        <Column marginTop={100}>
+          <Typography size={24}>Gerenciador de eventos para animadores de festas</Typography>
+        </Column>
+        <Column>
+          <Row marginBottom={20}>
+            <Button buttonColor={colors.white} fontColor={colors.secondary} onClick={() => setContent('createUser')}>Criar conta</Button>
+          </Row>
+          <Row marginBottom={40}>
+            <Button variant='outlined' buttonColor={colors.white} fontColor={colors.white} onClick={() => setContent('login')}>Entrar</Button>
+          </Row>
+          <Row marginBottom={20}>
+            <Typography size={18}>Desafio Front end Triider</Typography>
+          </Row>
+        </Column>
+      </ContentContainer>
+    )
+  }
+  
+  const renderLogin = () => {
+    return (
+      <ContentContainer>
+        <pre>login</pre>
+      </ContentContainer>
+    )
+  }
+  
+  const renderCreateUser = () => {
+    return (
+      <ContentContainer>
+        <pre>create user</pre>
+      </ContentContainer>
+    )
+  }
+
+  const renderContent = () => {
+    switch(content) {
+      case 'login':
+        return renderLogin();
+      case 'createUser':
+        return renderCreateUser();
+      case 'home':
+      default:
+        return renderHome();
+    }
+  }
+
   return (
     <Container>
       <ImageContainer>
         <LinearMask />
-        <ContentContainer>
-          <Column marginTop={100}>
-            <Typography>Gerenciador de eventos para animadores de festas</Typography>
-          </Column>
-          <Column>
-            <Row marginBottom={20}>
-              <Button buttonColor={colors.white} fontColor={colors.secondary}>Criar conta</Button>
-            </Row>
-            <Row marginBottom={40}>
-              <Button variant='outlined' buttonColor={colors.white} fontColor={colors.white}>Entrar</Button>
-            </Row>
-            <Row marginBottom={20}>
-              <Typography>Desafio Front end Triider</Typography>
-            </Row>
-          </Column>
-        </ContentContainer>
+        {renderContent()}
       </ImageContainer>
     </Container>
   )
