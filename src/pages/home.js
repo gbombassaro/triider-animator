@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../styled/Button';
+import Typography from '../styled/Typography';
+import {Column, Row} from '../styled';
 import queries from '../utils/queries';
 import colors from '../utils/colors'
 
@@ -15,8 +17,12 @@ const ContentContainer = styled.div`
   z-index: 1;
   position: absolute;
   width: calc(100vw - 80px);
+  height: 100vh;
   padding-left: 40px;
   padding-right: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   @media (min-width: ${queries.lg}) {
     width: unset;
     position: unset;
@@ -58,8 +64,20 @@ const Home = props => {
       <ImageContainer>
         <LinearMask />
         <ContentContainer>
-          <Button buttonColor={colors.white} fontColor={colors.secondary}>Criar conta</Button>
-          <Button variant='outlined' buttonColor={colors.white} fontColor={colors.white}>Entrar</Button>
+          <Column marginTop={100}>
+            <Typography>Gerenciador de eventos para animadores de festas</Typography>
+          </Column>
+          <Column>
+            <Row marginBottom={20}>
+              <Button buttonColor={colors.white} fontColor={colors.secondary}>Criar conta</Button>
+            </Row>
+            <Row marginBottom={40}>
+              <Button variant='outlined' buttonColor={colors.white} fontColor={colors.white}>Entrar</Button>
+            </Row>
+            <Row marginBottom={20}>
+              <Typography>Desafio Front end Triider</Typography>
+            </Row>
+          </Column>
         </ContentContainer>
       </ImageContainer>
     </Container>
