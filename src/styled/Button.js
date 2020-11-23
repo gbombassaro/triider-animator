@@ -3,9 +3,13 @@ import React from 'react';
 import colors from '../utils/colors';
 import queries from '../utils/queries';
 
+const parseNumber = number => {
+  return `${number}px`
+};
+
 export const ButtonTypography = styled.span`
-  font-size: ${({size}) => size ? size : '20px'};
-  line-height: ${({size}) => size ? size + '2.5px' : '22.5px'};
+  font-size: ${({size}) => size ? parseNumber(size) : '20px'};
+  line-height: ${({size}) => size ? parseNumber(size) + '2.5px' : '22.5px'};
   font-family: 'Quicksand';
   font-weight: ${({bold}) => bold ? '700' : '400'};
   color: ${({color}) => color ? color : '#ffffff'};
@@ -19,7 +23,7 @@ const PrimaryButton = styled.button`
   justify-content: center;
   border: unset;
   background-color: ${({color}) => color ? color : colors.primary};
-  height: ${({size}) => size ? size : '60px'};
+  height: ${({size}) => size ? parseNumber(size) : '60px'};
   width: ${({fullWidth}) => fullWidth ? '100%' : 'max-content'};
   border-radius: 5px;
   cursor: pointer;
@@ -40,7 +44,7 @@ const OutlinedButton = styled.button`
   border-color: ${({color}) => color ? color : colors.primary};
   border-style: solid;
   background-color: unset;
-  height: ${({size}) => size ? size : '60px'};
+  height: ${({size}) => size ? parseNumber(size) : '60px'};
   width: ${({fullWidth}) => fullWidth ? '100%' : 'max-content'};
   border-radius: 5px;
   cursor: pointer;
@@ -53,12 +57,12 @@ const OutlinedButton = styled.button`
   }
 `
 
-const Button = ({bold, children, variant, size, fontColor, buttonColor, onClick}) => {
+const Button = ({bold, children, variant, size, fontSize, fontColor, buttonColor, onClick}) => {
   switch(variant) {
     case 'default':
       return (
         <PrimaryButton size={size} color={buttonColor} onClick={onClick}>
-          <ButtonTypography size={size} bold={bold} color={fontColor}>
+          <ButtonTypography size={fontSize} bold={bold} color={fontColor}>
             {children}
           </ButtonTypography>
         </PrimaryButton>
@@ -66,7 +70,7 @@ const Button = ({bold, children, variant, size, fontColor, buttonColor, onClick}
     case 'outlined':
       return (
         <OutlinedButton size={size} color={buttonColor} onClick={onClick}>
-          <ButtonTypography size={size} bold={bold} color={fontColor ? fontColor : colors.white}>
+          <ButtonTypography size={fontSize} bold={bold} color={fontColor ? fontColor : colors.white}>
             {children}
           </ButtonTypography>
         </OutlinedButton>

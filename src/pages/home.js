@@ -2,9 +2,14 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import Button from '../styled/Button';
 import Typography from '../styled/Typography';
+import Login from '../components/Login';
 import {Column, Row} from '../styled';
 import queries from '../utils/queries';
 import colors from '../utils/colors'
+
+const parseNumber = number => {
+  return `${number}px`
+};
 
 const Container = styled.div`
   display: flex;
@@ -16,10 +21,10 @@ const Container = styled.div`
 const ContentContainer = styled.div`
   z-index: 1;
   position: absolute;
-  width: calc(100vw - 80px);
+  width: ${({marginX}) => marginX ? `calc(100vw - ${marginX * 2}px)` : 'calc(100vw - 80px)'};
   height: 100vh;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: ${({marginX}) => marginX ? parseNumber(marginX) : '40px'};
+  padding-right: ${({marginX}) => marginX ? parseNumber(marginX) : '40px'};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -65,9 +70,9 @@ const Home = props => {
   const renderHome = () => {
     return (
       <ContentContainer>
-        <Column marginTop={100}>
+        <Row marginTop={100}>
           <Typography size={24}>Gerenciador de eventos para animadores de festas</Typography>
-        </Column>
+        </Row>
         <Column>
           <Row marginBottom={20}>
             <Button buttonColor={colors.white} fontColor={colors.secondary} onClick={() => setContent('createUser')}>Criar conta</Button>
@@ -85,16 +90,21 @@ const Home = props => {
   
   const renderLogin = () => {
     return (
-      <ContentContainer>
-        <pre>login</pre>
+      <ContentContainer marginX={16} >
+        <Row marginTop={40} marginBottom={40}>
+          <Typography size={30}>Entrar</Typography>
+        </Row>
+        <Login />
       </ContentContainer>
     )
   }
   
   const renderCreateUser = () => {
     return (
-      <ContentContainer>
-        <pre>create user</pre>
+      <ContentContainer marginX={16}>
+        <Row marginTop={40}>
+          <Typography size={30}>Criar conta</Typography>
+        </Row>
       </ContentContainer>
     )
   }

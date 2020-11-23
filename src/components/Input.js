@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import colors from '../utils/colors';
 
 const StyledInput = styled.input`
-  width: 100%;
+  width: calc(100% - 24px);
   height: ${({isMobile}) => isMobile ? '40px' : '60px'};
   padding-left: 12px;
   padding-right: 12px;
@@ -15,6 +15,7 @@ const StyledInput = styled.input`
   border-style: solid;
   border-width: 1px;
   color: ${colors.primary};
+  margin-bottom: 8px;
 `
 
 const StyledLabel = styled.label`
