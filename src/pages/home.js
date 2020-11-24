@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from '../styled/Button';
 import Typography from '../styled/Typography';
 import Login from '../components/Login';
+import CreateUser from '../components/CreateUser';
 import {Column, Row} from '../styled';
 import queries from '../utils/queries';
 import colors from '../utils/colors'
@@ -29,10 +30,11 @@ const ContentContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   @media (min-width: ${queries.lg}) {
-    width: unset;
+    width: calc(100% - 50px - 20px);
     position: unset;
     display: flex;
     z-index: 0;
+    padding-right: 50px;
     padding-left: 50px;
   }
 `
@@ -102,9 +104,10 @@ const Home = props => {
   const renderCreateUser = () => {
     return (
       <ContentContainer marginX={16}>
-        <Row marginTop={40}>
+        <Row marginTop={40} marginBottom={40}>
           <Typography size={30}>Criar conta</Typography>
         </Row>
+        <CreateUser/>
       </ContentContainer>
     )
   }
