@@ -11,7 +11,7 @@ const StyledInput = styled.input`
   padding-top: 0px;
   padding-bottom: 0px;
   border-radius: 5px;
-  border-color: #CCCCCC;
+  border-color: ${({warning}) => warning ? 'red' : '#CCCCCC'};
   border-style: solid;
   border-width: 1px;
   color: ${colors.primary};
@@ -23,15 +23,20 @@ const StyledLabel = styled.label`
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
-  color: #565656;
+  color: ${({warning}) => warning ? 'red' : '#565656'};
   margin-bottom: ${({isMobile}) => isMobile ? '8px' : '20px'};
 `
 
-const Input = ({onChange, value, label, isMobile}) => {
+const Input = ({onChange, value, label, type, isMobile, warning}) => {
+
+  const handleChange = ({target}) => {
+    onChange(target.value);
+  }
+
   return (
     <Column alignItems="flex-start">
-      {label && <StyledLabel isMobile={isMobile}>{label}</StyledLabel>}
-      <StyledInput isMobile={isMobile} value={value} onChange={onChange} />
+      {label && <StyledLabel isMobile={isMobile} warning={warning}>{label}</StyledLabel>}
+      <StyledInput isMobile={isMobile} warning={warning} value={value} onChange={handleChange} type={type} />
     </Column>
   )
 }
