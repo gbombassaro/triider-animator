@@ -57,6 +57,26 @@ const OutlinedButton = styled.button`
   }
 `
 
+const GradientButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: unset;
+  background: rgb(237,125,194);
+  background: linear-gradient(90deg, rgba(237,125,194,1) 0%, rgba(153,60,255,1) 100%);
+  height: ${({size}) => size ? parseNumber(size) : '60px'};
+  width: ${({fullWidth}) => fullWidth ? '100%' : 'max-content'};
+  border-radius: 5px;
+  cursor: pointer;
+  appearance: unset;
+  &:hover {
+    opacity: 0.8;
+  }
+  @media (max-width: ${queries.md}) {
+    width: calc(100% - 1px);
+  }
+`
+
 const Button = ({bold, children, variant, size, fontSize, fontColor, buttonColor, onClick}) => {
   switch(variant) {
     case 'default':
@@ -74,6 +94,14 @@ const Button = ({bold, children, variant, size, fontSize, fontColor, buttonColor
             {children}
           </ButtonTypography>
         </OutlinedButton>
+      )
+    case 'gradient':
+      return (
+        <GradientButton size={size} color={buttonColor} onClick={onClick}>
+          <ButtonTypography size={fontSize} bold={bold} color={fontColor ? fontColor : colors.white}>
+            {children}
+          </ButtonTypography>
+        </GradientButton>
       )
   }
 }

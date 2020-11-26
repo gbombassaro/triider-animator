@@ -26,7 +26,7 @@ const Login = props => {
     <Panel>
       <Input isMobile={true} warning={warning} label="Email" onChange={param => setData({email: param, password: data.password})} />
       <Input isMobile={true} warning={warning} type='password' label="Senha" onChange={param => setData({email: data.email, password: param})}/>
-      <Button size={50} onClick={() => fetchAPI()}>Entrar</Button>
+      <Button variant='gradient' size={50} onClick={() => fetchAPI()}>Entrar</Button>
     </Panel>
   )
 }

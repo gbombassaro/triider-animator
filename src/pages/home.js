@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import Button from '../styled/Button';
-import Typography from '../styled/Typography';
+import Typography from '../components/Typography';
 import Login from '../components/Login';
 import CreateUser from '../components/CreateUser';
 import {Column, Row} from '../styled';

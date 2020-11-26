@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Panel} from '../styled';
 import Button from '../styled/Button';
 import Input from './Input';
+import DaysOfWeek from './DaysOfWeek';
 
 const CreateUser = props => {
 
@@ -37,19 +38,21 @@ const CreateUser = props => {
           label="Crie uma senha"
           onChange={param => setData({...data, password: param})}
         />
-        <Button size={50} onClick={() => setContent(1)}>Avançar</Button>
+        <Button variant='gradient' size={50} onClick={() => setContent(1)}>Avançar</Button>
       </React.Fragment>
     )
   }
 
   const renderSecondContent = () => {
     return (
-      <Input 
-        isMobile={true}
-        // warning={warning}
-        label="Qual o seu preço?"
-        onChange={param => setData({...data, price: param})}
-      />
+      <React.Fragment>
+        <Input 
+          isMobile={true}        
+          label="Qual o seu preço?"
+          onChange={param => setData({...data, price: param})}
+          />
+        <DaysOfWeek></DaysOfWeek>
+      </React.Fragment>
     )
   }
 
