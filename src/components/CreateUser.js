@@ -4,6 +4,7 @@ import Button from './Button';
 import Input from './Input';
 import DaysOfWeek from './DaysOfWeek';
 import Shifts from './Shifts';
+import Select from './Select';
 // import {send} from '../connection';
 
 const CreateUser = props => {
@@ -18,6 +19,29 @@ const CreateUser = props => {
     day_shifts: [],
     price: null
   })
+
+  const categories = [
+    {
+      id: 'magician',
+      label: 'Mágico'
+    },
+    {
+      id: 'tester',
+      label: 'Tester'
+    },
+    {
+      id: 'dev',
+      label: 'Desenvolvedor'
+    },
+    {
+      id: 'front',
+      label: 'Desenvolvedor front'
+    },
+    {
+      id: 'backend',
+      label: 'Desenvolvedor backend'
+    }
+  ];
 
   // const fetchAPI = async () => {
   //   const payload = await send();
@@ -52,6 +76,7 @@ const CreateUser = props => {
   const renderSecondContent = () => {
     return (
       <React.Fragment>
+        <Select options={categories} />
         <DaysOfWeek />
         <Shifts />
         <Row marginTop={30}>
