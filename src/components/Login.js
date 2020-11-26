@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {find} from 'lodash';
 import Input from './Input';
-import Button from '../styled/Button';
+import Button from './Button';
 import {Panel} from '../styled';
 import {get} from '../connection';
 

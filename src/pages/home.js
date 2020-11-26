@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import Button from '../styled/Button';
+import Button from '../components/Button';
 import Typography from '../components/Typography';
 import Login from '../components/Login';
 import CreateUser from '../components/CreateUser';

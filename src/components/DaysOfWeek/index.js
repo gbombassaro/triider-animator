@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {find, remove} from 'lodash';
+import React, {useState} from 'react';
+import {find} from 'lodash';
 import DayButton from './DayButton';
 import {Row, Column} from '../../styled'
 import {StyledLabel} from '../../styled/typography';

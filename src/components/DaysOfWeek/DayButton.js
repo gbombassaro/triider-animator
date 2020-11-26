@@ -6,7 +6,7 @@ import Typography from '../Typography';
 const Container = styled.button`
   width: 35px;
   height: 35px;
-  background-color: ${({selected}) => selected ? colors.primary : '#EEEEEE'};
+  background-color: ${({selected}) => selected ? colors.primary : colors.disabled};
   border-radius: 50%;
   display: flex;
   align-items: center;

@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Panel} from '../styled';
-import Button from '../styled/Button';
+import Button from './Button';
 import Input from './Input';
 import DaysOfWeek from './DaysOfWeek';
+import Shifts from './Shifts';
 
 const CreateUser = props => {
 
@@ -52,6 +53,7 @@ const CreateUser = props => {
           onChange={param => setData({...data, price: param})}
           />
         <DaysOfWeek></DaysOfWeek>
+        <Shifts></Shifts>
       </React.Fragment>
     )
   }

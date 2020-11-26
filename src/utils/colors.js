@@ -1,7 +1,8 @@
 const colors = {
   primary: "#ED7DC2",
   secondary: "#993CFF",
-  white: "#FFFFFF"
+  white: "#FFFFFF",
+  disabled: "#EEEEEE"
 }
 
 export default colors;
