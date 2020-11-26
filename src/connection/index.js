@@ -1,5 +1,7 @@
+const domain = 'http://localhost:3000/';
+
 export const get = (sufix) => {
-  const url = `http://localhost:3000/${sufix}`;
+  const url = `${domain}${sufix}`;
   const method = 'GET';
   const headers = {'Content-Type': 'application/json'};
   const options = {method, headers};
@@ -10,7 +12,7 @@ export const get = (sufix) => {
 }
 
 export const edit = (path, param) => {
-  const url = 'http://localhost:3000/users/2'; //PRECISA PASSAR O ID COMO PARAM DA REQUEST
+  const url = '${domain}users/2'; //PRECISA PASSAR O ID COMO PARAM DA REQUEST
   const method = 'PUT';
   const headers = {'Content-Type': 'application/json'};
   const body = param;
@@ -22,8 +24,8 @@ export const edit = (path, param) => {
     });
 }
 
-export const send = (path, param) => {
-  const url = 'http://localhost:3000/users/2';
+export const send = (sufix, param) => {
+  const url = `${domain}${sufix}`;
   const method = 'POST';
   const headers = {'Content-Type': 'application/json'};
   const body = param;

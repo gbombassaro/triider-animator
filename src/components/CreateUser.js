@@ -4,6 +4,7 @@ import Button from './Button';
 import Input from './Input';
 import DaysOfWeek from './DaysOfWeek';
 import Shifts from './Shifts';
+// import {send} from '../connection';
 
 const CreateUser = props => {
 
@@ -17,6 +18,10 @@ const CreateUser = props => {
     day_shifts: [],
     price: null
   })
+
+  // const fetchAPI = async () => {
+  //   const payload = await send();
+  // }
 
   const renderFirstContent = () => {
     return (
@@ -57,7 +62,7 @@ const CreateUser = props => {
           />
         </Row>
         <Row marginTop={30}>
-          <Button variant='gradient' size={50} onClick={() => setContent(1)}>Criar Conta</Button>
+          <Button variant='gradient' size={50} onClick={() => console.log('Criar usuário')}>Criar Conta</Button>
         </Row>
       </React.Fragment>
     )
