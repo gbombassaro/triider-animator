@@ -7,7 +7,8 @@ import Button from '../Button';
 import colors from '../../utils/colors';
 
 const ButtonContainer = styled.div`
-  margin-right: 10px;
+  margin-right: 8px;
+  margin-bottom: 8px;
   &:last-child {
     margin-right: unset;
   }
@@ -47,10 +48,10 @@ const Shifts = props => {
   return (
     <Column marginTop={30} alignItems='flex-start'>
       <StyledLabel>Selecione os turnos em que trabalhará?</StyledLabel>
-      <Row>
+      <Row wrap justifyContent='flex-start'>
         {items.map(entry => (
           <ButtonContainer>
-            <Button key={entry.id} buttonColor={entry.selected ? colors.primary : colors.disabled} onClick={() => handleClick(entry.id)}>{entry.label}</Button>
+            <Button key={entry.id} disableFullWidth size={40} buttonColor={entry.selected ? colors.primary : colors.disabled} onClick={() => handleClick(entry.id)}>{entry.label}</Button>
           </ButtonContainer>
         ))}
       </Row>

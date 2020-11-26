@@ -34,4 +34,6 @@ export const Panel = styled.div`
   background-color: ${colors.white};
   margin-bottom: 40px;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
 `

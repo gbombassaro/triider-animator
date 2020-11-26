@@ -13,8 +13,8 @@ export const ButtonTypography = styled.span`
   font-family: 'Quicksand';
   font-weight: ${({bold}) => bold ? '700' : '400'};
   color: ${({color}) => color ? color : '#ffffff'};
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
 `
 
 const PrimaryButton = styled.button`
@@ -24,7 +24,7 @@ const PrimaryButton = styled.button`
   border: unset;
   background-color: ${({color}) => color ? color : colors.primary};
   height: ${({size}) => size ? parseNumber(size) : '60px'};
-  width: ${({fullWidth}) => fullWidth ? '100%' : 'max-content'};
+  width: ${({fullWidth, disableFullWidth}) => fullWidth || !disableFullWidth ? '100%' : 'max-content'};
   border-radius: 5px;
   cursor: pointer;
   appearance: unset;
@@ -32,7 +32,7 @@ const PrimaryButton = styled.button`
     opacity: 0.8;
   }
   @media (max-width: ${queries.md}) {
-    width: 100%;
+    width: ${({disableFullWidth}) => disableFullWidth ? 'max-content' : '100%'};
   }
 `
 
@@ -45,7 +45,7 @@ const OutlinedButton = styled.button`
   border-style: solid;
   background-color: unset;
   height: ${({size}) => size ? parseNumber(size) : '60px'};
-  width: ${({fullWidth}) => fullWidth ? '100%' : 'max-content'};
+  width: ${({fullWidth, disableFullWidth}) => fullWidth || !disableFullWidth ? '100%' : 'max-content'};
   border-radius: 5px;
   cursor: pointer;
   appearance: unset;
@@ -53,7 +53,7 @@ const OutlinedButton = styled.button`
     opacity: 0.8;
   }
   @media (max-width: ${queries.md}) {
-    width: calc(100% - 1px);
+    width: ${({disableFullWidth}) => disableFullWidth ? 'max-content' : 'calc(100% - 1px)'};
   }
 `
 
@@ -65,7 +65,7 @@ const GradientButton = styled.button`
   background: rgb(237,125,194);
   background: linear-gradient(90deg, rgba(237,125,194,1) 0%, rgba(153,60,255,1) 100%);
   height: ${({size}) => size ? parseNumber(size) : '60px'};
-  width: ${({fullWidth}) => fullWidth ? '100%' : 'max-content'};
+  width: ${({fullWidth, disableFullWidth}) => fullWidth || !disableFullWidth ? '100%' : 'max-content'};
   border-radius: 5px;
   cursor: pointer;
   appearance: unset;
@@ -73,23 +73,15 @@ const GradientButton = styled.button`
     opacity: 0.8;
   }
   @media (max-width: ${queries.md}) {
-    width: calc(100% - 1px);
+    width: ${({disableFullWidth}) => disableFullWidth ? 'max-content' : '100%'};
   }
 `
 
-const Button = ({bold, children, variant, size, fontSize, fontColor, buttonColor, onClick}) => {
-  switch(variant) {
-    case 'default':
-      return (
-        <PrimaryButton size={size} color={buttonColor} onClick={onClick}>
-          <ButtonTypography size={fontSize} bold={bold} color={fontColor}>
-            {children}
-          </ButtonTypography>
-        </PrimaryButton>
-      )
+const Button = ({bold, disableFullWidth, children, variant, size, fontSize, fontColor, buttonColor, onClick}) => {
+  switch(variant) { 
     case 'outlined':
       return (
-        <OutlinedButton size={size} color={buttonColor} onClick={onClick}>
+        <OutlinedButton disableFullWidth={disableFullWidth} size={size} color={buttonColor} onClick={onClick}>
           <ButtonTypography size={fontSize} bold={bold} color={fontColor ? fontColor : colors.white}>
             {children}
           </ButtonTypography>
@@ -97,17 +89,27 @@ const Button = ({bold, children, variant, size, fontSize, fontColor, buttonColor
       )
     case 'gradient':
       return (
-        <GradientButton size={size} color={buttonColor} onClick={onClick}>
+        <GradientButton disableFullWidth={disableFullWidth} size={size} color={buttonColor} onClick={onClick}>
           <ButtonTypography size={fontSize} bold={bold} color={fontColor ? fontColor : colors.white}>
             {children}
           </ButtonTypography>
         </GradientButton>
       )
+    case 'default':
+    default:
+      return (
+        <PrimaryButton disableFullWidth={disableFullWidth} size={size} color={buttonColor} onClick={onClick}>
+          <ButtonTypography size={fontSize} bold={bold} color={fontColor}>
+            {children}
+          </ButtonTypography>
+        </PrimaryButton>
+      )
   }
 }
 
 Button.defaultProps = {
-  variant: 'default'
+  variant: 'default',
+  disableFullWidth: false
 }
 
 export default Button;

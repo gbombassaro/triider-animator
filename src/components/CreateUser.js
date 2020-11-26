@@ -56,6 +56,9 @@ const CreateUser = props => {
             onChange={param => setData({...data, price: param})}
           />
         </Row>
+        <Row marginTop={30}>
+          <Button variant='gradient' size={50} onClick={() => setContent(1)}>Criar Conta</Button>
+        </Row>
       </React.Fragment>
     )
   }
