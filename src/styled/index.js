@@ -14,6 +14,8 @@ export const Row = styled.div`
   margin-top: ${({marginTop}) => marginTop ? parseNumber(marginTop) : '0px'};
   margin-bottom: ${({marginBottom}) => marginBottom ? parseNumber(marginBottom) : '0px'};
   width: 100%;
+  height: ${({height}) => height ? height : 'max-content'};
+  overflow-x: ${({overflowX}) => overflowX ? overflowX : 'unset'};
 `
 
 export const Column = styled.div`
@@ -36,4 +38,14 @@ export const Panel = styled.div`
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+`
+
+export const BooksContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  background: rgb(237,125,194);
+  background: linear-gradient(180deg, rgba(237,125,194,1) 0%, rgba(153,60,255,1) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

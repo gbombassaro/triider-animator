@@ -1,8 +1,13 @@
 import React from 'react';
+import MobileCalendar from '../components/MobileCalendar';
+import {BooksContainer} from '../styled';
+import data from '../usermock.json';
 
 const Books = props => {
   return (
-    <pre>books</pre>
+    <BooksContainer>
+      <MobileCalendar data={data} />
+    </BooksContainer>
   )
 }
 

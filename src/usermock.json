@@ -1,0 +1,21 @@
+{
+  "id": 3,
+  "name": "João",
+  "email": "teste@teste3.com",
+  "category": "magician2345",
+  "week_days": [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday"
+  ],
+  "day_shifts": [
+    "morning",
+    "afternoon",
+    "night"
+  ],
+  "price": 200
+}
