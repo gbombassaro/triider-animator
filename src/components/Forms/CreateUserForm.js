@@ -43,10 +43,6 @@ const CreateUser = props => {
     }
   ];
 
-  // const fetchAPI = async () => {
-  //   const payload = await send();
-  // }
-
   const renderFirstContent = () => {
     return (
       <React.Fragment>
@@ -76,7 +72,7 @@ const CreateUser = props => {
   const renderSecondContent = () => {
     return (
       <React.Fragment>
-        <Select options={categories} />
+        <Select options={categories} label='Selecione sua categoria' />
         <DaysOfWeek />
         <Shifts />
         <Row marginTop={30}>

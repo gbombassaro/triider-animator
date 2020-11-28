@@ -1,6 +1,8 @@
 import React from 'react'; 
 import styled from 'styled-components';
 import colors from '../../utils/colors';
+import {Column} from '../../styled';
+import {StyledLabel} from '../../styled/typography';
 
 const StyledSelect = styled.select`
   width: 100%;
@@ -16,16 +18,19 @@ const StyledSelect = styled.select`
   border-color: #CCCCCC;
 `
 
-const Select = ({options, onChange}) => {
+const Select = ({options, onChange, isMobile, warning, label}) => {
 
   const handleChange = ({target}) => {
     onChange(target.value);
   }
 
   return (
-    <StyledSelect onChange={handleChange}>
-      {options.map(option => <option value={option.id}>{option.label}</option>)}
-    </StyledSelect>
+    <Column alignItems='flex-start'>
+      {label && <StyledLabel isMobile={isMobile} warning={warning}>{label}</StyledLabel>}
+      <StyledSelect onChange={handleChange}>
+        {options.map(option => <option value={option.id}>{option.label}</option>)}
+      </StyledSelect>
+    </Column>
   )
 }
 
