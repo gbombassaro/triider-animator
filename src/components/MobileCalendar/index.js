@@ -1,22 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import {find} from 'lodash';
-import Button from '../Button';
 import Typography from '../Typography';
 import ShiftCard from './ShiftCard';
 import {Row, Column} from '../../styled';
 import colors from '../../utils/colors';
 import {parseDate, parseFromAPI} from '../../utils/parser';
-
-import {startOfMonth, endOfMonth, eachDayOfInterval, getUnixTime} from 'date-fns';
-
-const now = new Date();
-const firstDayMonth = startOfMonth(now);
-const lastDayMonth = endOfMonth(now);
-const days = eachDayOfInterval({start: firstDayMonth, end: lastDayMonth});
-const shifts = ["morning", "afternoon", "night"];
-
-// console.log(firstDayMonth, lastDayMonth, days);
 
 const MobilePanel = styled.div`
   min-width: calc(80% - 20px - 32px);
@@ -36,7 +25,7 @@ const Centralizer = styled.div`
   justify-content: center;
 `
 
-const MobileCalendar = ({user, events}) => {
+const MobileCalendar = ({user, events, dates, shifts}) => {
 
   if (!user) return null;
 
@@ -48,10 +37,10 @@ const MobileCalendar = ({user, events}) => {
         <Typography></Typography>
         <MobilePanel>
           {shifts.map(entry => {
-            const isActive = find(day_shifts, entry);
+            const isActive = find(day_shifts, entry.id);
             // const isBooked = find(events, event => parse(event.date) === parseDate(date));
             // console.log(events);
-            events.map(event => parseFromAPI(event.date))
+            // events.map(event => parseFromAPI(event.date))
             // return <ShiftCard isActive={isActive} booked={isBooked} shift={entry} /> 
           })}
         </MobilePanel>
@@ -62,10 +51,9 @@ const MobileCalendar = ({user, events}) => {
   return (
     <Centralizer>
       <Row overflowX='scroll' height='100%' alignItems='center' justifyContent='flex-start'>
-        {days.map(entry => <Day date={entry} />)}
+        {dates.map(entry => <Day date={entry} />)}
       </Row>
     </Centralizer>
-    // <Button variant='outlined' buttonColor={colors.white} size={50} onClick={() => console.log('clique')}>Adicionar Evento</Button>
   )
 }
 

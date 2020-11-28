@@ -12,6 +12,8 @@ const StyledSelect = styled.select`
   font-size: 12px;
   color: ${colors.primary};
   text-transform: capitalize;
+  background-color: ${colors.white};
+  border-color: #CCCCCC;
 `
 
 const Select = ({options}) => {
