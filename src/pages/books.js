@@ -21,7 +21,6 @@ const BooksContainer = styled.div`
 
 const Books = props => {
   //STATE
-  const [userData, setUserData] = useState({});
   const [userEvents, setUserEvents] = useState([]);
   const [dialogStatus, setDialog] = useState(false);
 
@@ -38,7 +37,7 @@ const Books = props => {
   const getUserData = async () => {
     const url = `users/${userId}`;
     await get(url)
-      .then(payload => setUserData(payload))
+      .then(payload => props.setNewConfig(payload))
       .catch(e => console.error(e));
   }
 
@@ -63,21 +62,27 @@ const Books = props => {
 
   if (!userId) return <pre>Usuário não autenticado.</pre>
 
-  const {availableDays, availableShifts} = props.configs;
+  const {daysOfMonth, availableShifts, availableDays} = props.configs;
 
   return (
     <BooksContainer>
-      <MobileCalendar user={userData} events={userEvents} dates={availableDays} shifts={availableShifts} />
+      <MobileCalendar events={userEvents}  availableDays={availableDays} daysOfMonth={daysOfMonth} availableShifts={availableShifts} />
       <Button variant='outlined' buttonColor={colors.white} size={50} onClick={() => setDialog(true)}>Adicionar Evento</Button>
       <Dialog title='Cadastrar evento' open={dialogStatus} onClose={() => setDialog(false)}>
-        <CreateEventForm availableDays={availableDays} availableShifts={availableShifts} isMobile={true} createAction={param => newEvent(param)} />
+        <CreateEventForm availableDays={availableDays} daysOfMonth={daysOfMonth} availableShifts={availableShifts} isMobile={true} createAction={param => newEvent(param)} />
       </Dialog>
     </BooksContainer>
   )
+}
+
+const mapDispatcherToProps = dispatchEvent => {
+  return {
+    setNewConfig: data => dispatchEvent({type: 'SET_NEW_CONFIG', payload: data})
+  }
 }
 
 const mapStateToProps = state => {
   return {configs: state.configs};
 }
 
-export default connect(mapStateToProps, null)(Books);
+export default connect(mapStateToProps, mapDispatcherToProps)(Books);

@@ -3,8 +3,8 @@ const domain = 'http://localhost:3000/';
 export const get = (sufix, params) => {
   const url = `${domain}${sufix}`;
   const method = 'GET';
-  const headers = {'Content-Type': 'application/json', ...params};
-  console.log(headers);
+  const parsedParams = params ? params : {};
+  const headers = {'Content-Type': 'application/json', ...parsedParams};
   const options = {method, headers};
   return fetch(url, options)
     .then(payload => {

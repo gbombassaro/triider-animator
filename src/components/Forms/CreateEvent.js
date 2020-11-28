@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
+import {find} from 'lodash';
 import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
 import {Row, Column} from '../../styled';
 
-const CreateEventForm = ({availableDays, availableShifts, isMobile, createAction}) => {
+const CreateEventForm = ({availableDays, daysOfMonth, availableShifts, isMobile, createAction}) => {
 
-  const daysForSelect = availableDays.map(entry => { return {id: entry, label: entry} });
+  //MAPEIA DIAS DISPONÍVEIS E RENDERIZA UMA LISTA PARA O SELECT
+  const dateOptions = [];
+  daysOfMonth.map(entry => {
+    const isAvailable = find(availableDays, {day: entry.day});
+    if (isAvailable) dateOptions.push({id: entry.date, label: entry.date});
+  })
+
   const initalState = {
-    date: daysForSelect[0].id,
+    date: dateOptions[0].id,
     day_shift: availableShifts[0].id
   };
   
@@ -38,7 +45,7 @@ const CreateEventForm = ({availableDays, availableShifts, isMobile, createAction
         <Row width='50%' marginRight={8}>
           <Select
             label='Data'
-            options={daysForSelect}
+            options={dateOptions}
             onChange={param => handleChange(param, 'date')}
           />
         </Row>

@@ -17,6 +17,6 @@ export const parseDate = param => {
   return format(param, 'd/MM/yyyy');
 }
 
-export const parseFromAPI = param => {
-  console.log(parseISO(param));
+export const parseDayOfWeek = param => {
+  return format(param, 'EEEE').toLowerCase();
 }

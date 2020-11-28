@@ -7,6 +7,12 @@ import {Row, Column} from '../../styled';
 import colors from '../../utils/colors';
 import {parseDate, parseFromAPI} from '../../utils/parser';
 
+const shiftsModel = [
+  { id: "morning", label: "Manhã" },
+  { id: "afternoon", label: "Tarde" },
+  { id: "night", label: "Noite" }
+];
+
 const MobilePanel = styled.div`
   min-width: calc(80% - 20px - 32px);
   height: calc(100% - 20px - 32px);
@@ -25,19 +31,15 @@ const Centralizer = styled.div`
   justify-content: center;
 `
 
-const MobileCalendar = ({user, events, dates, shifts}) => {
-
-  if (!user) return null;
-
-  const {day_shifts} = user;
+const MobileCalendar = ({events, daysOfMonth, availableShifts}) => {
 
   const Day = ({date}) => {
     return (
       <React.Fragment>
         <Typography></Typography>
         <MobilePanel>
-          {shifts.map(entry => {
-            const isActive = find(day_shifts, entry.id);
+          {shiftsModel.map(entry => {
+            // const isActive = find(day_shifts, entry.id);
             // const isBooked = find(events, event => parse(event.date) === parseDate(date));
             // console.log(events);
             // events.map(event => parseFromAPI(event.date))
@@ -51,7 +53,7 @@ const MobileCalendar = ({user, events, dates, shifts}) => {
   return (
     <Centralizer>
       <Row overflowX='scroll' height='100%' alignItems='center' justifyContent='flex-start'>
-        {dates.map(entry => <Day date={entry} />)}
+        {/* {daysOfMonth.map(entry => <Day date={entry} />)} */}
       </Row>
     </Centralizer>
   )
