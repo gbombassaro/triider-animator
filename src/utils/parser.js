@@ -1,3 +1,5 @@
+import {format, parseISO} from 'date-fns';
+
 export const parseShifts = param => {
   switch(param) {
     case 'morning':
@@ -9,4 +11,12 @@ export const parseShifts = param => {
     default:
       return param;
   }
+}
+
+export const parseDate = param => {
+  return format(param, 'yyyyMMd');
+}
+
+export const parseFromAPI = param => {
+  console.log(parseISO(param));
 }
