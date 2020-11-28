@@ -1,6 +1,6 @@
 import React from 'react'; 
 import styled from 'styled-components';
-import colors from '../utils/colors';
+import colors from '../../utils/colors';
 
 const StyledSelect = styled.select`
   width: 100%;

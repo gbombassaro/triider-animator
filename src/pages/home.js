@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import {find} from 'lodash';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
-import Login from '../components/Login';
-import CreateUser from '../components/CreateUser';
+import Login from '../components/Forms/LoginForm';
+import CreateUser from '../components/Forms/CreateUserForm';
 import {Column, Row} from '../styled';
 import queries from '../utils/queries';
 import colors from '../utils/colors'
+import {get} from '../connection';
 
 const parseNumber = number => {
   return `${number}px`
@@ -68,6 +70,23 @@ const LinearMask = styled.div`
 const Home = props => {
 
   const [content, setContent] = useState('');
+  const [fieldError, setFieldError] = useState(false);
+
+  const authenticate = (payload, localData) => {
+    const user = find(payload, item => item.email === localData.email);
+    const passwordIsRight = user && user.password === localData.password;
+    if (!user || !passwordIsRight) setFieldError(true);
+    else {
+      setFieldError(false);
+      localStorage.setItem('triider/userId', user.id);
+      window.location.assign(`/books`);
+    }
+  }
+
+  const getUsers = async (localData) => {
+    const payload = await get('users');
+    authenticate(payload, localData);
+  }
 
   const renderHome = () => {
     return (
@@ -96,7 +115,7 @@ const Home = props => {
         <Row marginTop={40} marginBottom={40}>
           <Typography size={30}>Entrar</Typography>
         </Row>
-        <Login />
+        <Login loginAction={getUsers} fieldError={fieldError} />
       </ContentContainer>
     )
   }

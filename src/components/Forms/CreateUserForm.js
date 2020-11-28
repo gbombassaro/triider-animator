@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {Panel, Row} from '../styled';
-import Button from './Button';
-import Input from './Input';
-import DaysOfWeek from './DaysOfWeek';
-import Shifts from './Shifts';
-import Select from './Select';
+import {Panel, Row} from '../../styled';
+import Button from '../Button';
+import Input from '../Input';
+import DaysOfWeek from '../DaysOfWeek';
+import Shifts from '../Shifts';
+import Select from '../Select';
 // import {send} from '../connection';
 
 const CreateUser = props => {

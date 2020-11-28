@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
-import colors from '../utils/colors';
-import queries from '../utils/queries';
+import colors from '../../utils/colors';
+import queries from '../../utils/queries';
 
 const parseNumber = number => {
   return `${number}px`

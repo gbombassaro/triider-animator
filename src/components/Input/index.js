@@ -1,8 +1,8 @@
 import React from 'react';
-import {Column} from '../styled'
-import {StyledLabel} from '../styled/typography';
 import styled from 'styled-components';
-import colors from '../utils/colors';
+import {Column} from '../../styled'
+import {StyledLabel} from '../../styled/typography';
+import colors from '../../utils/colors';
 
 const StyledInput = styled.input`
   width: calc(100% - 24px);
