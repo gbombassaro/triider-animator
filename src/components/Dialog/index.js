@@ -32,7 +32,7 @@ const Dialog = ({open, onClose, title, children}) => {
       <StyledDialog open={open}>
         <Row justifyContent='space-between' marginBottom={40}>
           <Typography size={20} color={colors.primary} textAlign='left'>{title}</Typography>
-          <img src='/closeIcon.svg' width={24} height={24} fill={colors.primary} onClick={onClose} />
+          <img src='/closeIcon.svg' width={24} height={24} onClick={onClose} />
         </Row>
         {children}
       </StyledDialog>

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-// import {connect} from 'react-redux';
 import {find} from 'lodash';
 import Input from './Input';
 import Button from './Button';
 import {Panel} from '../styled';
 import {get} from '../connection';
+// import {connect} from 'react-redux';
 
 const Login = props => {
 
@@ -23,8 +23,6 @@ const Login = props => {
     authenticate(payload);
   }
 
-  // console.log('REDUX', props.globalState.user);
-
   return (
     <Panel>
       <Input isMobile={true} warning={warning} label="Email" onChange={param => setData({email: param, password: data.password})} />
@@ -41,8 +39,8 @@ const Login = props => {
 // }
 
 // const getState = state => {
-//   return {globalState: state};
+//   return state;
 // }
 
-// export default connect(getState, dispatcher)(Login);
+// export default connect(getState, null)(Login);
 export default Login;

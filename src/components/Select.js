@@ -16,10 +16,10 @@ const StyledSelect = styled.select`
   border-color: #CCCCCC;
 `
 
-const Select = ({options}) => {
+const Select = ({options, onChange}) => {
 
   const handleChange = ({target}) => {
-    console.log(target.value);
+    onChange(target.value);
   }
 
   return (

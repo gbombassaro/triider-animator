@@ -1,21 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
+import {connect} from 'react-redux';
 import Button from '../components/Button';
-import Dialog from '../components/Dialog';
-import Input from '../components/Input';
-import Select from '../components/Select';
-import {Row, Column} from '../styled';
 import MobileCalendar from '../components/MobileCalendar';
+import Dialog from '../components/Dialog';
+import CreateEventForm from '../components/Forms/CreateEvent';
 import {get, send} from '../connection';
 import colors from '../utils/colors';
-
-import {parseDate, parseFromAPI} from '../utils/parser';
-import {startOfMonth, endOfMonth, eachDayOfInterval, getUnixTime} from 'date-fns';
-
-const now = new Date();
-const firstDayMonth = startOfMonth(now);
-const lastDayMonth = endOfMonth(now);
-const days = eachDayOfInterval({start: firstDayMonth, end: lastDayMonth});
 
 const BooksContainer = styled.div`
   width: 100%;
@@ -52,16 +43,17 @@ const Books = props => {
   }
 
   const getUserEvents = async () => {
-    const url = `events/${userId}`;
-    await get(url)
-      .then(payload => setUserEvents([payload]))
+    const url = `events`;
+    const headers = {userId: 1};
+    await get(url, headers)
+      .then(payload => setUserEvents(payload))
       .catch(e => console.error(e));
   }
 
-  const newEvent = async () => {
+  const newEvent = async params => {
     const url = 'events';
-    const body = {}
-    await send(url)
+    const parsedParams = {...params, user_id: userId};
+    await send(url, parsedParams)
       .then(payload => {
         getUserEvents();
         setDialog(false);
@@ -71,43 +63,21 @@ const Books = props => {
 
   if (!userId) return <pre>Usuário não autenticado.</pre>
 
-  const parsedDays = days.map(entry => {
-    return {id: entry, label: parseDate(entry)}
-  });
-  
-  const shifts = [
-    { id: "morning", label: "Manhã" },
-    { id: "afternoon", label: "Tarde" },
-    { id: "night", label: "Noite" }
-  ];
+  const {availableDays, availableShifts} = props.configs;
 
   return (
     <BooksContainer>
-      <MobileCalendar user={userData} events={userEvents} dates={days} shifts={shifts} />
+      <MobileCalendar user={userData} events={userEvents} dates={availableDays} shifts={availableShifts} />
       <Button variant='outlined' buttonColor={colors.white} size={50} onClick={() => setDialog(true)}>Adicionar Evento</Button>
-
       <Dialog title='Cadastrar evento' open={dialogStatus} onClose={() => setDialog(false)}>
-        <Column marginBottom={40}>
-          <Row marginBottom={30}>
-            <Input label='Nome do evento' isMobile={true} />
-          </Row>
-          <Row marginBottom={30}>
-            <Input label='Local' isMobile={true} />
-          </Row>
-          <Row>
-            <Row width='50%' marginRight={8}>
-              <Select label='Data' options={parsedDays} />
-            </Row>
-            <Row width='50%' marginLeft={8}>
-              <Select label='Turno' options={shifts} />
-            </Row>
-          </Row>
-        </Column>
-        <Button variant='gradient' size={50} onClick={() => newEvent(true)}>Adicionar Evento</Button>
+        <CreateEventForm availableDays={availableDays} availableShifts={availableShifts} isMobile={true} createAction={param => newEvent(param)} />
       </Dialog>
-
     </BooksContainer>
   )
 }
 
-export default Books;
+const mapStateToProps = state => {
+  return {configs: state.configs};
+}
+
+export default connect(mapStateToProps, null)(Books);
