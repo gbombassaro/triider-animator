@@ -16,7 +16,7 @@ const shiftsModel = [
   { id: "night", label: "Noite" }
 ];
 
-const MobilePanel = styled.div`
+const Panel = styled.div`
   min-width: calc(80% - 20px - 32px);
   height: calc(100% - 20px - 32px);
   background: ${colors.white};
@@ -38,17 +38,17 @@ const Container = styled.div`
   margin-left: 16px;
   margin-right: 16px;
   &:first-child {
-    margin-left: 64px;
+    margin-left: 55px;
   }
 `
 
-const MobileCalendar = ({events, daysOfMonth, availableShifts}) => {
+const Calendar = ({events, daysOfMonth, availableShifts}) => {
 
   const Day = ({date, title}) => {
     return (
       <Container>
         <Typography textAlign='left' marginBottom={16}>{title}</Typography>
-        <MobilePanel>
+        <Panel>
           {shiftsModel.map(entry => {
             //verifica inatividade do cartão (usuário marcou como indisponível)
             const isActive = find(availableShifts, {id: entry.id});
@@ -58,7 +58,7 @@ const MobileCalendar = ({events, daysOfMonth, availableShifts}) => {
             if (isBooked) return <BookedCard content={isBooked} />
             return <ActiveContent content={entry.label} />
           })}
-        </MobilePanel>
+        </Panel>
       </Container>
     )
   }
@@ -72,4 +72,4 @@ const MobileCalendar = ({events, daysOfMonth, availableShifts}) => {
   )
 }
 
-export default MobileCalendar;
+export default Calendar;

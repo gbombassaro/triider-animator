@@ -6,13 +6,11 @@ const getInitialState = () => {
   const firstDayMonth = startOfMonth(now);
   const lastDayMonth = endOfMonth(now);
   const availableDays = eachDayOfInterval({start: firstDayMonth, end: lastDayMonth});
-
   const availableShifts = [
     { id: "morning", label: "Manhã" },
     { id: "afternoon", label: "Tarde" },
     { id: "night", label: "Noite" }
   ];
-
   return { availableShifts, daysOfMonth: availableDays }
 }
 

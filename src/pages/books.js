@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import Button from '../components/Button';
-import MobileCalendar from '../components/MobileCalendar';
+import Calendar from '../components/Calendar';
 import Dialog from '../components/Dialog';
 import CreateEventForm from '../components/Forms/CreateEvent';
 import {get, send} from '../connection';
@@ -17,6 +17,11 @@ const BooksContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`
+const ButtonContainer = styled.div`
+  max-width: 300px;
+  width: 100%;
+  margin-top: 32px;
 `
 
 const Books = props => {
@@ -65,8 +70,10 @@ const Books = props => {
 
   return (
     <BooksContainer>
-      <MobileCalendar events={userEvents} availableDays={availableDays} daysOfMonth={daysOfMonth} availableShifts={availableShifts} />
-      <Button variant='outlined' buttonColor={colors.white} size={50} onClick={() => setDialog(true)}>Adicionar Evento</Button>
+      <Calendar events={userEvents} availableDays={availableDays} daysOfMonth={daysOfMonth} availableShifts={availableShifts} />
+      <ButtonContainer>
+        <Button variant='outlined' buttonColor={colors.white} size={50} onClick={() => setDialog(true)}>Adicionar Evento</Button>
+      </ButtonContainer>
       <Dialog title='Cadastrar evento' open={dialogStatus} onClose={() => setDialog(false)}>
         <CreateEventForm availableDays={availableDays} daysOfMonth={daysOfMonth} availableShifts={availableShifts} isMobile={true} createAction={param => newEvent(param)} />
       </Dialog>
