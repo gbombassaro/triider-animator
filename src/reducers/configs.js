@@ -20,7 +20,7 @@ const setNewConfig = (state, action) => {
   const {payload} = action;
   const availableShifts = payload.day_shifts.map(entry => { return {id: entry, label: parseShifts(entry)} });
   const availableDays = payload.week_days.map(entry => { return {day: entry} });
-  const daysOfMonth = state.daysOfMonth.map(entry => { return {date: parseDate(entry), day: parseDayOfWeek(entry)}})
+  const daysOfMonth = state.daysOfMonth.map(entry => { return {date: parseDate(entry), day: parseDayOfWeek(entry), originalDate: entry}})
   return {...state.configs, availableShifts, availableDays, daysOfMonth};
 }
 

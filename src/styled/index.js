@@ -30,6 +30,18 @@ export const Column = styled.div`
   margin-top: ${({marginTop}) => marginTop ? parseNumber(marginTop) : '0px'};
   margin-bottom: ${({marginBottom}) => marginBottom ? parseNumber(marginBottom) : '0px'};
   width: ${({width}) => width ? width : '100%'};
+
+  &:last-child {
+    .Divider {
+      display: none;
+    }
+    .shift-card {
+      margin-bottom: 0px;
+    }
+    &.shift-card-container {
+      margin-bottom: 0px;
+    }
+  }
 `
 
 export const Panel = styled.div`
@@ -61,4 +73,29 @@ export const ContentContainer = styled.div`
     padding-right: 50px;
     padding-left: 50px;
   }
+`
+
+export const ShiftContainer = styled.div`
+  width: calc(100% - 36px);
+  height: calc(120px - 36px);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: ${({alignItems}) => alignItems ? alignItems : 'center'};
+  justify-content: ${({justifyContent}) => justifyContent ? justifyContent : 'center'};
+  border-radius: 5px;
+  background-color: ${({color}) => color ? color : '#C4C4C4'};
+  opacity: ${({disabled}) => disabled ? 0.3 : 1};
+  padding: 18px;
+  &:first-child {
+    margin-top: 0px;
+  }
+`
+
+export const Divider = styled.div`
+  width: 100%;
+  height: 10px;
+  background-color: #E9E9E9;
+  border-radius: 20px;
+  opacity: 0.3;
 `

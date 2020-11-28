@@ -2,10 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import {find} from 'lodash';
 import Typography from '../Typography';
-import ShiftCard from './ShiftCard';
-import {Row, Column} from '../../styled';
+import {Row} from '../../styled';
 import colors from '../../utils/colors';
-import {parseDate, parseFromAPI} from '../../utils/parser';
+import {parseCompleteDate} from '../../utils/parser';
+
+import InactiveCard from './InactiveContent';
+import BookedCard from './BookedContent';
+import ActiveContent from './ActiveContent';
 
 const shiftsModel = [
   { id: "morning", label: "Manhã" },
@@ -19,8 +22,6 @@ const MobilePanel = styled.div`
   background: ${colors.white};
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 32px;
-  margin-left: 32px;
 `
 
 const Centralizer = styled.div`
@@ -31,29 +32,41 @@ const Centralizer = styled.div`
   justify-content: center;
 `
 
+const Container = styled.div`
+  min-width: 260px;
+  max-width: 400px;
+  margin-left: 16px;
+  margin-right: 16px;
+  &:first-child {
+    margin-left: 64px;
+  }
+`
+
 const MobileCalendar = ({events, daysOfMonth, availableShifts}) => {
 
-  const Day = ({date}) => {
+  const Day = ({date, title}) => {
     return (
-      <React.Fragment>
-        <Typography></Typography>
+      <Container>
+        <Typography textAlign='left' marginBottom={16}>{title}</Typography>
         <MobilePanel>
           {shiftsModel.map(entry => {
-            // const isActive = find(day_shifts, entry.id);
-            // const isBooked = find(events, event => parse(event.date) === parseDate(date));
-            // console.log(events);
-            // events.map(event => parseFromAPI(event.date))
-            // return <ShiftCard isActive={isActive} booked={isBooked} shift={entry} /> 
+            //verifica inatividade do cartão (usuário marcou como indisponível)
+            const isActive = find(availableShifts, {id: entry.id});
+            //verifica se tem agendamento na API
+            const isBooked = find(events, {date: date, day_shift: entry.id});
+            if (!isActive) return <InactiveCard />
+            if (isBooked) return <BookedCard content={isBooked} />
+            return <ActiveContent content={entry.label} />
           })}
         </MobilePanel>
-      </React.Fragment>
+      </Container>
     )
   }
 
   return (
     <Centralizer>
       <Row overflowX='scroll' height='100%' alignItems='center' justifyContent='flex-start'>
-        {/* {daysOfMonth.map(entry => <Day date={entry} />)} */}
+        {daysOfMonth.map(entry => <Day title={parseCompleteDate(entry.originalDate)} date={entry.date} />)}
       </Row>
     </Centralizer>
   )

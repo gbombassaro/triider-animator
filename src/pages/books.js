@@ -24,9 +24,8 @@ const Books = props => {
   const [userEvents, setUserEvents] = useState([]);
   const [dialogStatus, setDialog] = useState(false);
 
-  //GLOBAL DATA
-  const splittedUserId = props.location.pathname.split('/books/')
-  const userId = splittedUserId[1];
+  //GET USER ID
+  const userId = localStorage.getItem('triider/userId');
 
   //LISTENER
   useEffect(() => {
@@ -66,7 +65,7 @@ const Books = props => {
 
   return (
     <BooksContainer>
-      <MobileCalendar events={userEvents}  availableDays={availableDays} daysOfMonth={daysOfMonth} availableShifts={availableShifts} />
+      <MobileCalendar events={userEvents} availableDays={availableDays} daysOfMonth={daysOfMonth} availableShifts={availableShifts} />
       <Button variant='outlined' buttonColor={colors.white} size={50} onClick={() => setDialog(true)}>Adicionar Evento</Button>
       <Dialog title='Cadastrar evento' open={dialogStatus} onClose={() => setDialog(false)}>
         <CreateEventForm availableDays={availableDays} daysOfMonth={daysOfMonth} availableShifts={availableShifts} isMobile={true} createAction={param => newEvent(param)} />

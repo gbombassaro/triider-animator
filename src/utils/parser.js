@@ -1,4 +1,5 @@
 import {format, parseISO} from 'date-fns';
+import {ptBR} from 'date-fns/locale';
 
 export const parseShifts = param => {
   switch(param) {
@@ -19,4 +20,11 @@ export const parseDate = param => {
 
 export const parseDayOfWeek = param => {
   return format(param, 'EEEE').toLowerCase();
+}
+
+export const parseCompleteDate = param => {
+  if (!param) return null;
+  const month = format(param, 'MMMM', {locale: ptBR});
+  const day = format(param, 'd');
+  return `${day} de ${month}`;
 }
