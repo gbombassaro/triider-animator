@@ -1,44 +1,16 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import {find} from 'lodash';
-import Button from '../components/Button';
-import Typography from '../components/Typography';
-import Login from '../components/Forms/LoginForm';
-import CreateUser from '../components/Forms/CreateUserForm';
-import {Column, Row} from '../styled';
 import queries from '../utils/queries';
-import colors from '../utils/colors'
-import {get} from '../connection';
 
-const parseNumber = number => {
-  return `${number}px`
-};
+import Home from '../components/Home';
+import Login from '../components/Login';
+import CreateUser from '../components/CreateUser';
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-`
-
-const ContentContainer = styled.div`
-  z-index: 1;
-  position: absolute;
-  width: ${({marginX}) => marginX ? `calc(100vw - ${marginX * 2}px)` : 'calc(100vw - 80px)'};
-  height: 100vh;
-  padding-left: ${({marginX}) => marginX ? parseNumber(marginX) : '40px'};
-  padding-right: ${({marginX}) => marginX ? parseNumber(marginX) : '40px'};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  @media (min-width: ${queries.lg}) {
-    width: calc(100% - 50px - 20px);
-    position: unset;
-    display: flex;
-    z-index: 0;
-    padding-right: 50px;
-    padding-left: 50px;
-  }
 `
 
 const ImageContainer = styled.div`
@@ -67,79 +39,17 @@ const LinearMask = styled.div`
   }
 `
 
-const Home = props => {
+const Page = props => {
 
   const [content, setContent] = useState('');
-  const [fieldError, setFieldError] = useState(false);
-
-  const authenticate = (payload, localData) => {
-    const user = find(payload, item => item.email === localData.email);
-    const passwordIsRight = user && user.password === localData.password;
-    if (!user || !passwordIsRight) setFieldError(true);
-    else {
-      setFieldError(false);
-      localStorage.setItem('triider/userId', user.id);
-      window.location.assign(`/books`);
-    }
-  }
-
-  const getUsers = async (localData) => {
-    const payload = await get('users');
-    authenticate(payload, localData);
-  }
-
-  const renderHome = () => {
-    return (
-      <ContentContainer>
-        <Row marginTop={100}>
-          <Typography size={24}>Gerenciador de eventos para animadores de festas</Typography>
-        </Row>
-        <Column>
-          <Row marginBottom={20}>
-            <Button buttonColor={colors.white} fontColor={colors.secondary} onClick={() => setContent('createUser')}>Criar conta</Button>
-          </Row>
-          <Row marginBottom={40}>
-            <Button variant='outlined' buttonColor={colors.white} fontColor={colors.white} onClick={() => setContent('login')}>Entrar</Button>
-          </Row>
-          <Row marginBottom={20}>
-            <Typography size={18}>Desafio Front end Triider</Typography>
-          </Row>
-        </Column>
-      </ContentContainer>
-    )
-  }
-  
-  const renderLogin = () => {
-    return (
-      <ContentContainer marginX={16} >
-        <Row marginTop={40} marginBottom={40}>
-          <Typography size={30}>Entrar</Typography>
-        </Row>
-        <Login loginAction={getUsers} fieldError={fieldError} />
-      </ContentContainer>
-    )
-  }
-  
-  const renderCreateUser = () => {
-    return (
-      <ContentContainer marginX={16}>
-        <Row marginTop={40} marginBottom={40}>
-          <Typography size={30}>Criar conta</Typography>
-        </Row>
-        <CreateUser/>
-      </ContentContainer>
-    )
-  }
 
   const renderContent = () => {
-    switch(content) {
-      case 'login':
-        return renderLogin();
-      case 'createUser':
-        return renderCreateUser();
-      case 'home':
-      default:
-        return renderHome();
+    if (content === 'login') {
+      return <Login />;
+    } else if (content === 'createUser') {
+      return <CreateUser />;
+    } else {
+      return <Home setContent={param => setContent(param)} />;
     }
   }
 
@@ -153,4 +63,4 @@ const Home = props => {
   )
 }
 
-export default Home;
+export default Page;
