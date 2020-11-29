@@ -10,7 +10,7 @@ import Select from '../Select';
 const CreateUser = props => {
 
   const [content, setContent] = useState(0);
-  const [data, setData] = useState({
+  const [state, setState] = useState({
     name: '',
     email: '',
     password: '',
@@ -43,6 +43,10 @@ const CreateUser = props => {
     }
   ];
 
+  const handleChange = (value, id) => {
+    setState({...state, [id]: value})
+  }
+
   const renderFirstContent = () => {
     return (
       <React.Fragment>
@@ -50,19 +54,19 @@ const CreateUser = props => {
           isMobile={true}
           // warning={warning}
           label="Qual o seu nome?"
-          onChange={param => setData({...data, name: param})}
+          onChange={param => handleChange(param, 'name')}
         />
         <Input 
           isMobile={true}
           // warning={warning}
           label="E seu email?"
-          onChange={param => setData({...data, email: param})}
+          onChange={param => handleChange(param, 'email')}
         />
         <Input 
           isMobile={true}
           // warning={warning}
           label="Crie uma senha"
-          onChange={param => setData({...data, password: param})}
+          onChange={param => handleChange(param, 'password')}
         />
         <Button variant='gradient' size={50} onClick={() => setContent(1)}>Avançar</Button>
       </React.Fragment>
@@ -72,14 +76,14 @@ const CreateUser = props => {
   const renderSecondContent = () => {
     return (
       <React.Fragment>
-        <Select options={categories} label='Selecione sua categoria' />
-        <DaysOfWeek />
-        <Shifts />
+        <Select options={categories} label='Selecione sua categoria' onChange={param => handleChange(param, 'category')} />
+        <DaysOfWeek onChange={param => handleChange(param, 'week_days')} />
+        <Shifts onChange={param => handleChange(param, 'day_shifts')} />
         <Row marginTop={30}>
           <Input 
             isMobile={true}        
             label="Qual o seu preço?"
-            onChange={param => setData({...data, price: param})}
+            onChange={param => handleChange(param, 'price')}
           />
         </Row>
         <Row marginTop={30}>

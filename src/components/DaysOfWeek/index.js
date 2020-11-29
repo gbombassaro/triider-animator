@@ -53,6 +53,10 @@ const DaysOfWeek = props => {
       item.selected = true;
       setSelected([...items])
     }
+    
+    let daysIds = [];
+    items.map(entry => entry.selected === true && daysIds.push(entry.id));
+    props.onChange(daysIds);
   }
 
   return (

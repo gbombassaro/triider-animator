@@ -43,6 +43,10 @@ const Shifts = props => {
       item.selected = true;
       setSelected([...items])
     }
+
+    let shiftsIds = [];
+    items.map(entry => entry.selected === true && shiftsIds.push(entry.id));
+    props.onChange(shiftsIds);
   }
 
   return (
