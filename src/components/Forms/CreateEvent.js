@@ -15,14 +15,32 @@ const CreateEventForm = ({availableDays, daysOfMonth, availableShifts, isMobile,
   })
 
   const initalState = {
+    name: '',
+    address: '',
     date: dateOptions[0].id,
     day_shift: availableShifts[0].id
   };
   
   const [state, setState] = useState(initalState);
+  const [invalidFields, setInvalidFields] = useState([]);
 
   const handleChange = (value, id) => {
     setState({...state, [id]: value})
+  }
+
+  const validateFields = () => {
+    const {name, address, date, day_shift} = state;
+    let fields = [];
+    if (name.length < 1) fields.push({value: 'name'});
+    if (address.length < 1) fields.push({value: 'address'});
+    if (date.length < 1) fields.push({value: 'date'});
+    if (day_shift.length < 1) fields.push({value: 'day_shift'});
+    setInvalidFields(fields);
+  }
+
+  const handleClick = () => {
+    validateFields();
+    if (invalidFields.length = 0) createAction(state);
   }
 
   return (
@@ -32,6 +50,7 @@ const CreateEventForm = ({availableDays, daysOfMonth, availableShifts, isMobile,
           label='Nome do evento'
           isMobile={isMobile}
           onChange={param => handleChange(param, 'name')}
+          warning={find(invalidFields, {value: 'name'})}
         />
       </Row>
       <Row marginBottom={30}>
@@ -39,6 +58,7 @@ const CreateEventForm = ({availableDays, daysOfMonth, availableShifts, isMobile,
           label='Local'
           isMobile={isMobile}
           onChange={param => handleChange(param, 'address')}
+          warning={find(invalidFields, {value: 'name'})}
         />
       </Row>
       <Row marginBottom={30}>
@@ -57,7 +77,7 @@ const CreateEventForm = ({availableDays, daysOfMonth, availableShifts, isMobile,
           />
         </Row>
       </Row>
-      <Button variant='gradient' size={50} onClick={() => createAction(state)}>Adicionar Evento</Button>
+      <Button variant='gradient' size={50} onClick={() => handleClick()}>Adicionar Evento</Button>
     </Column>
   )
 }
