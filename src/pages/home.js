@@ -5,6 +5,7 @@ import queries from '../utils/queries';
 import Home from '../components/Home';
 import Login from '../components/Login';
 import CreateUser from '../components/CreateUser';
+import {useWindowSize} from '../utils/width';
 
 const Container = styled.div`
   display: flex;
@@ -35,6 +36,7 @@ const LinearMask = styled.div`
   background: rgb(237,125,194);
   background: linear-gradient(180deg, rgba(237,125,194, 0.8) 0%, rgba(153,60,255, 0.8) 100%);
   @media (min-width: ${queries.lg}) {
+    min-width: 671px;
     max-width: 671px;
   }
 `
@@ -43,13 +45,16 @@ const Page = props => {
 
   const [content, setContent] = useState('');
 
+  const dimensions = useWindowSize();
+  const isMobile = dimensions.width > 1016 ? false : true;
+
   const renderContent = () => {
     if (content === 'login') {
       return <Login />;
     } else if (content === 'createUser') {
       return <CreateUser />;
     } else {
-      return <Home setContent={param => setContent(param)} />;
+      return <Home setContent={param => setContent(param)} isMobile={isMobile} />;
     }
   }
 

@@ -11,7 +11,7 @@ const getInitialState = () => {
     { id: "afternoon", label: "Tarde" },
     { id: "night", label: "Noite" }
   ];
-  return { availableShifts, daysOfMonth: availableDays }
+  return { availableShifts, daysOfMonth: availableDays };
 }
 
 const setNewConfig = (state, action) => {
