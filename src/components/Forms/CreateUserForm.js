@@ -47,6 +47,10 @@ const CreateUser = props => {
     setState({...state, [id]: value})
   }
 
+  const handleClick = () => {
+    props.createUserAction(state);
+  }
+
   const renderFirstContent = () => {
     return (
       <React.Fragment>
@@ -87,7 +91,7 @@ const CreateUser = props => {
           />
         </Row>
         <Row marginTop={30}>
-          <Button variant='gradient' size={50} onClick={() => console.log('Criar usuário')}>Criar Conta</Button>
+          <Button variant='gradient' size={50} onClick={() => handleClick()}>Criar Conta</Button>
         </Row>
       </React.Fragment>
     )
